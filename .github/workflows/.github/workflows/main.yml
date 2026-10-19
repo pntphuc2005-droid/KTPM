@@ -23,21 +23,18 @@ jobs:
           node-version: '20'
 
       - name: Install Newman
-        run: |
-          npm install -g newman
+        run: npm install -g newman
 
       - name: Show files
-        run: |
-          pwd
-          ls -la
+        run: ls -la
 
       - name: Run Newman Tests
         run: |
           newman run RestfulBooker.postman_collection.json \
-          -e RestfulBooker.postman_environment.json \
+          -e RestfulBooker_Env.postman_environment.json \
           -d "booking data.csv"
 
-      - name: Upload Test Report
+      - name: Upload Report
         if: always()
         uses: actions/upload-artifact@v4
         with:
